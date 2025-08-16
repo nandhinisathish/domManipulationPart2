@@ -105,17 +105,42 @@ topMenuEl.addEventListener('click', event => {
     const target = event.target;
 
     if (target.tagName !== 'A') {
+        console.log(`Not clicked on anchor tag`);
         return
     }
     console.log(`clicked `, clickedItem);
-
-    if (clickedItem) {
-        for (const element of topMenuLinks) {
-
-            clickedItem.classList.remove('active');
+    if (target.classList.contains(`active`)) {
+         target.classList.toggle('active');
+      
+        console.log(`if `);
+    } else {
+          topMenuLinks.forEach(menuItem => {
+            menuItem.classList.remove('active');
+        });
+       
+    } 
+        target.classList.toggle('active');
+       // clickedItem = target;
+        console.log(`end `);
+  
+for(link of menuLinks){
+     console.log(`link.text `, link.text);
+     console.log(`target.text `, target.text);
+    if(link.text != target.text){
+        continue;
+    }
+    if(target.classList.contains(`active`)){
+          console.log(`target `, target.classList.contains(`active`));
+            console.log(`sub `, 'subLinks' in link);
+        if( 'subLinks' in link){
+            subMenuEl.style.top = '100%';
+        }else{
+            subMenuEl.style.top = '0';
         }
     }
-    target.classList.add('active');
-    clickedItem = target;
+    
+}
 
 });
+
+
