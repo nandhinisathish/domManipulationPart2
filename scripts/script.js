@@ -157,3 +157,13 @@ function buildSubMenu(subLinksArray) {
     });
 }
 
+subMenuEl.addEventListener('click', function (event) {
+    event.preventDefault();
+    const clickedSubLink = event.target;
+    if (clickedSubLink.tagName !== 'A') return;
+    console.log('Submenu link clicked:', clickedSubLink.textContent);
+    subMenuEl.style.top = '0';
+    const topMenuLinks = topMenuEl.querySelectorAll('a');
+    topMenuLinks.forEach(link => link.classList.remove('active'));
+    mainEl.innerHTML = `<h1>${clickedSubLink.textContent.toUpperCase()}</h1>`; //
+});
