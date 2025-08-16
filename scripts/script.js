@@ -110,37 +110,50 @@ topMenuEl.addEventListener('click', event => {
     }
     console.log(`clicked `, clickedItem);
     if (target.classList.contains(`active`)) {
-         target.classList.toggle('active');
-      
+        target.classList.toggle('active');
+
         console.log(`if `);
     } else {
-          topMenuLinks.forEach(menuItem => {
+        topMenuLinks.forEach(menuItem => {
             menuItem.classList.remove('active');
         });
-       
-    } 
-        target.classList.toggle('active');
-       // clickedItem = target;
-        console.log(`end `);
-  
-for(link of menuLinks){
-     console.log(`link.text `, link.text);
-     console.log(`target.text `, target.text);
-    if(link.text != target.text){
-        continue;
+
     }
-    if(target.classList.contains(`active`)){
-          console.log(`target `, target.classList.contains(`active`));
-            console.log(`sub `, 'subLinks' in link);
-        if( 'subLinks' in link){
-            subMenuEl.style.top = '100%';
-        }else{
-            subMenuEl.style.top = '0';
+    target.classList.toggle('active');
+    // clickedItem = target;
+    console.log(`end `);
+
+    for (link of menuLinks) {
+        console.log(`link.text `, link.text);
+        console.log(`target.text `, target.text);
+        if (link.text != target.text) {
+            continue;
         }
+        if (target.classList.contains(`active`)) {
+            console.log(`target `, target.classList.contains(`active`));
+            console.log(`sub `, 'subLinks' in link);
+            if ('subLinks' in link) {
+                subMenuEl.style.top = '100%';
+                buildSubMenu(link.subLinks);
+            } else {
+                subMenuEl.style.top = '0';
+            }
+        }
+
     }
-    
-}
 
 });
 
+function buildSubMenu(subLinksArray) {
+    subMenuEl.innerHTML = '';
+
+    // Iterate over the subLinks array, passed as an argument
+    subLinksArray.forEach(subLink => { //
+
+        const a = document.createElement('a'); //
+        a.href = subLink.href;
+        a.textContent = subLink.text;
+        subMenuEl.appendChild(a);
+    });
+}
 
